@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #F8FAFC;
+  --color-section: #F1F5F9;
+  --color-card: #FFFFFF;
+  --color-primary: #0F172A;
+  --color-secondary: #475569;
+  --color-accent: #FF8C1A;
+  --color-accent-hover: #FFA94D;
+
+  --color-primary-accent: #FF8C1A;
+  /* For backward compatibility if needed */
+}
+
+.dark {
+  --color-background: #020617;
+  --color-section: #0B1120;
+  --color-card: rgba(15, 23, 42, 0.65);
+  --color-primary: #FFFFFF;
+  --color-secondary: #E5E7EB;
+}
+
+:root {
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #FFFFFF;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
+}
+
+.glass-card {
+  background: var(--color-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 140, 26, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dark .glass-card {
+  background: var(--color-card);
+  border: 1px solid rgba(255, 140, 26, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.accent-glow {
+  box-shadow: 0 0 20px rgba(255, 140, 26, 0.2);
+}
+
+.dark .accent-glow {
+  box-shadow: 0 0 30px rgba(255, 140, 26, 0.4);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #FF8C1A, #FFA94D);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
