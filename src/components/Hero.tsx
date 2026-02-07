@@ -28,7 +28,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: false }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="container mx-auto grid md:grid-cols-2 gap-12 items-center"
             >
                 {/* Left Content */}
@@ -52,21 +52,21 @@ const Hero = () => {
 
                     <motion.h1
                         variants={itemVariants}
-                        className="text-5xl md:text-7xl font-bold leading-tight text-primary"
+                        className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight text-primary"
                     >
                         Hi, I&apos;m <span className="text-accent">Usama Muzammil</span>
                     </motion.h1>
 
                     <motion.h2
                         variants={itemVariants}
-                        className="text-2xl md:text-3xl font-semibold text-accent"
+                        className="text-xl sm:text-2xl md:text-3xl font-semibold text-accent"
                     >
                         Full Stack Web Developer & AI Engineer
                     </motion.h2>
 
                     <motion.p
                         variants={itemVariants}
-                        className="text-lg text-secondary max-w-lg leading-relaxed"
+                        className="text-base sm:text-lg text-secondary max-w-lg leading-relaxed"
                     >
                         I build fast, scalable, and intelligent web applications that help businesses grow. From modern frontend experiences to powerful backend systems and AI-driven solutions, I turn ideas into real-world digital products.
                     </motion.p>
@@ -75,14 +75,14 @@ const Hero = () => {
                         <a
                             href="/cv/usamacv.docx"
                             download="usamacv.docx"
-                            className="flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow group"
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow group"
                         >
                             <Download size={20} />
                             Download CV
                         </a>
                         <Link
                             href="#contact"
-                            className="flex items-center gap-2 px-8 py-4 bg-transparent border border-slate-200 dark:border-slate-800 text-primary rounded-full font-bold hover:border-accent transition-all"
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-transparent border border-slate-200 dark:border-slate-800 text-primary rounded-full font-bold hover:border-accent transition-all"
                         >
                             <Mail size={20} />
                             Hire Me
@@ -111,17 +111,18 @@ const Hero = () => {
                                 height={500}
                                 className="object-contain"
                                 priority
+                                sizes="(max-width: 768px) 300px, 500px"
                             />
                         </motion.div>
 
-                        {/* Background Glow */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 blur-[100px] rounded-full -z-10" />
+                        {/* Background Glow - Optimized for mobile */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 blur-[60px] md:blur-[100px] rounded-full -z-10" />
 
-                        {/* Floating Tech Icons */}
+                        {/* Floating Tech Icons - Simplified rotation for mobile */}
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                            className="absolute top-0 left-0 w-full h-full pointer-events-none hidden sm:block"
                         >
                             <div className="absolute top-[10%] left-[10%] p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
                                 <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width={30} height={30} alt="React" />

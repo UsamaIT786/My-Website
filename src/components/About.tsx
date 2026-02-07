@@ -7,29 +7,29 @@ import Link from "next/link";
 
 const StatCounter = ({ value, label, color }: { value: string; label: string; color: string }) => {
     const ref = React.useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { once: false, amount: 0.5 });
+    const inView = useInView(ref, { once: true, amount: 0.5 });
     const [count, setCount] = React.useState(0);
     const target = parseInt(value);
+    const [hasAnimated, setHasAnimated] = React.useState(false);
 
     React.useEffect(() => {
-        if (inView) {
+        if (inView && !hasAnimated) {
             const controls = animate(0, target, {
                 duration: 2,
                 ease: "easeOut",
                 onUpdate: (latest) => setCount(Math.floor(latest)),
             });
+            setHasAnimated(true);
             return () => controls.stop();
-        } else {
-            setCount(0);
         }
-    }, [inView, target]);
+    }, [inView, target, hasAnimated]);
 
     return (
         <div ref={ref} className="text-center">
-            <div className={`text-3xl font-bold ${color} mb-1 transition-transform hover:scale-110`}>
+            <div className={`text-2xl sm:text-3xl font-bold ${color} mb-1 transition-transform hover:scale-110`}>
                 {count}{value.includes("+") ? "+" : ""}
             </div>
-            <div className="text-secondary text-xs md:text-sm uppercase tracking-wider">
+            <div className="text-secondary text-[10px] sm:text-xs md:text-sm uppercase tracking-wider">
                 {label}
             </div>
         </div>
@@ -49,28 +49,29 @@ const About = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: false }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="container mx-auto"
             >
-                <div className="glass-card rounded-[40px] p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center">
+                <div className="glass-card rounded-[40px] p-6 sm:p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center">
                     {/* Illustration */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: false }}
-                        className="flex justify-center"
+                        viewport={{ once: true }}
+                        className="flex justify-center order-2 md:order-1"
                     >
-                        <div className="relative w-full max-w-[400px]">
+                        <div className="relative w-full max-w-[300px] md:max-w-[400px]">
                             <Image
                                 src="/1.png"
                                 alt="About Me Illustration"
                                 width={500}
                                 height={500}
                                 className="object-contain"
+                                sizes="(max-width: 768px) 300px, 500px"
                             />
                             {/* Decorative elements */}
-                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/20 blur-[60px] rounded-full" />
+                            <div className="absolute -top-5 -right-5 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-accent/20 blur-[40px] md:blur-[60px] rounded-full" />
                         </div>
                     </motion.div>
 
@@ -79,23 +80,22 @@ const About = () => {
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
+                        className="order-1 md:order-2 text-center md:text-left"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">About Me</h2>
-                        <p className="text-secondary text-lg leading-relaxed mb-8">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-primary">About Me</h2>
+                        <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8">
                             I’m Usama Muzammil, a passionate Full Stack Web Developer and AI Engineer with hands-on experience in building modern web applications and intelligent systems. I work as a freelancer, helping startups and businesses create reliable, high-performing, and visually engaging digital products.
-                            <br /><br />
-                            I focus on clean code, scalable architecture, smooth user experience, and smart automation. Whether it&apos;s a business website, web app, dashboard, or AI-powered solution, I deliver results that matter.
                         </p>
 
-                        <div className="grid grid-cols-3 gap-4 mb-10">
+                        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
                             {stats.map((stat, index) => (
                                 <StatCounter key={index} {...stat} />
                             ))}
                         </div>
 
                         <Link href="#projects">
-                            <button className="px-10 py-4 bg-transparent border border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-white transition-all shadow-lg shadow-accent/10">
+                            <button className="w-full sm:w-auto px-10 py-4 bg-transparent border border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-white transition-all shadow-lg shadow-accent/10">
                                 View My Work
                             </button>
                         </Link>

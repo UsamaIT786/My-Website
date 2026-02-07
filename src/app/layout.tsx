@@ -8,8 +8,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "OualiCode | Senior Frontend Architect & UI Designer",
-  description: "Professional portfolio showcasing advanced frontend development and motion design skills.",
+  title: "Usama Muzammil | Full Stack Web Developer & AI Engineer",
+  description: "Professional portfolio of Usama Muzammil, showcasing advanced frontend development, backend systems, and AI-driven solutions.",
+};
+
+export const viewport = {
+  themeColor: "#FF8C1A",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

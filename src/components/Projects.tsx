@@ -64,12 +64,12 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: false }}
+                viewport={{ once: true, amount: 0.1 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">My <span className="text-accent">Projects</span></h2>
-                    <p className="text-secondary max-w-2xl mx-auto">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">My <span className="text-accent">Projects</span></h2>
+                    <p className="text-secondary max-w-2xl mx-auto text-sm sm:text-base">
                         A selection of real-world projects that showcase my skills in web development, backend systems, and AI-powered applications.
                     </p>
                 </div>
@@ -78,21 +78,21 @@ const Projects = () => {
                     {projects.map((project, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            viewport={{ once: false }}
-                            className="bg-card rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 group shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                            transition={{ duration: 0.6, delay: index * 0.05 }}
+                            viewport={{ once: true }}
+                            className="bg-card rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 group shadow-md sm:shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                         >
-                            <div className="relative h-60 overflow-hidden">
+                            <div className="relative h-52 sm:h-60 overflow-hidden">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    unoptimized
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
-                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 hidden sm:flex">
                                     <Link href={project.live} target="_blank" className="p-3 bg-accent rounded-full text-white hover:bg-accent-hover transition-colors">
                                         <ExternalLink size={20} />
                                     </Link>
@@ -102,22 +102,22 @@ const Projects = () => {
                                 </div>
                             </div>
 
-                            <div className="p-6">
-                                <div className="flex gap-2 mb-4">
+                            <div className="p-5 sm:p-6">
+                                <div className="flex flex-wrap gap-2 mb-4">
                                     {project.tags.map(tag => (
-                                        <span key={tag} className="text-[10px] uppercase font-bold tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full">
+                                        <span key={tag} className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-accent bg-accent/10 px-2 sm:px-3 py-1 rounded-full">
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
-                                <h3 className="text-xl font-bold mb-2 text-primary group-hover:text-accent transition-colors uppercase tracking-tight">{project.title}</h3>
-                                <p className="text-secondary text-sm mb-6 line-clamp-2 italic">{project.desc}</p>
-                                <div className="flex gap-4">
-                                    <Link href={project.github} target="_blank" className="flex-1 flex items-center justify-center gap-2 py-3 bg-section border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-bold text-primary hover:border-accent transition-all uppercase tracking-widest">
-                                        <Code size={14} className="text-accent" /> Source Code
+                                <h3 className="text-lg sm:text-xl font-bold mb-2 text-primary group-hover:text-accent transition-colors uppercase tracking-tight">{project.title}</h3>
+                                <p className="text-secondary text-xs sm:text-sm mb-6 line-clamp-2 italic">{project.desc}</p>
+                                <div className="flex gap-3 sm:gap-4">
+                                    <Link href={project.github} target="_blank" className="flex-1 flex items-center justify-center gap-2 py-3 bg-section border border-slate-200 dark:border-slate-800 rounded-xl text-[10px] sm:text-xs font-bold text-primary hover:border-accent transition-all uppercase tracking-widest">
+                                        <Code size={14} className="text-accent" /> Source
                                     </Link>
-                                    <Link href={project.live} target="_blank" className="flex-1 flex items-center justify-center gap-2 py-3 bg-accent rounded-xl text-xs font-bold text-white hover:bg-accent-hover transition-all uppercase tracking-widest">
-                                        <ExternalLink size={14} /> Live Preview
+                                    <Link href={project.live} target="_blank" className="flex-1 flex items-center justify-center gap-2 py-3 bg-accent rounded-xl text-[10px] sm:text-xs font-bold text-white hover:bg-accent-hover transition-all uppercase tracking-widest">
+                                        <ExternalLink size={14} /> Live
                                     </Link>
                                 </div>
                             </div>
@@ -125,24 +125,24 @@ const Projects = () => {
                     ))}
                 </div>
 
-                <div className="mt-20 text-center">
-                    <button className="px-12 py-5 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow uppercase tracking-widest text-sm shadow-2xl shadow-accent/20">
+                <div className="mt-16 sm:mt-20 text-center">
+                    <button className="w-full sm:w-auto px-12 py-5 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow uppercase tracking-widest text-xs sm:text-sm shadow-2xl shadow-accent/20">
                         View All Projects
                     </button>
                 </div>
 
                 {/* Freelance Focus Section */}
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false }}
-                    className="mt-32 p-12 rounded-[40px] bg-card border border-slate-100 dark:border-slate-800 text-center shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
+                    viewport={{ once: true }}
+                    className="mt-24 sm:mt-32 p-8 sm:p-12 rounded-[32px] sm:rounded-[40px] bg-card border border-slate-100 dark:border-slate-800 text-center shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                 >
-                    <h3 className="text-3xl font-bold mb-6 text-primary">Looking for a reliable freelancer?</h3>
-                    <p className="text-secondary max-w-3xl mx-auto text-lg leading-relaxed mb-10">
+                    <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-primary">Looking for a reliable freelancer?</h3>
+                    <p className="text-secondary max-w-3xl mx-auto text-base sm:text-lg leading-relaxed mb-10">
                         I help businesses and individuals bring their ideas to life with high-quality, scalable, and secure web solutions. Let’s discuss your project and turn your vision into reality.
                     </p>
-                    <Link href="#contact" className="inline-block px-12 py-5 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow uppercase tracking-widest text-sm">
+                    <Link href="#contact" className="inline-block w-full sm:w-auto px-12 py-5 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow uppercase tracking-widest text-xs sm:text-sm">
                         Let’s Build Your Project
                     </Link>
                 </motion.div>

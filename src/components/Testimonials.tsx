@@ -56,46 +56,46 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: false }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Client <span className="text-accent">Testimonials</span></h2>
-                    <p className="text-secondary max-w-2xl mx-auto">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">Client <span className="text-accent">Testimonials</span></h2>
+                    <p className="text-secondary max-w-2xl mx-auto text-sm sm:text-base">
                         Don&apos;t just take my word for it. Here&apos;s what business owners and founders around the world have to say about my work.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            viewport={{ once: false }}
-                            whileHover={{ y: -10 }}
-                            className="bg-card p-8 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-xl shadow-gray-200/50 dark:shadow-none relative group transition-all duration-300"
+                            transition={{ duration: 0.6, delay: index * 0.05 }}
+                            viewport={{ once: true }}
+                            whileHover={{ y: -5 }}
+                            className="bg-card p-6 sm:p-8 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-xl shadow-gray-200/50 dark:shadow-none relative group transition-all duration-300"
                         >
-                            <Quote className="absolute top-6 right-8 text-accent/10 group-hover:text-accent/20 transition-colors" size={40} />
+                            <Quote className="absolute top-6 right-8 text-accent/10 group-hover:text-accent/20 transition-colors hidden sm:block" size={40} />
 
-                            <div className="flex gap-1 mb-6">
+                            <div className="flex gap-1 mb-6 justify-center sm:justify-start">
                                 {[...Array(testimonial.stars)].map((_, i) => (
-                                    <Star key={i} size={16} className="fill-accent text-accent" />
+                                    <Star key={i} size={14} className="fill-accent text-accent" />
                                 ))}
                             </div>
 
-                            <p className="text-secondary italic mb-8 leading-relaxed relative z-10">
+                            <p className="text-secondary italic mb-8 leading-relaxed relative z-10 text-sm sm:text-base text-center sm:text-left">
                                 &quot;{testimonial.feedback}&quot;
                             </p>
 
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent font-bold text-xl uppercase">
+                            <div className="flex items-center gap-4 justify-center sm:justify-start">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent font-bold text-lg sm:text-xl uppercase">
                                     {testimonial.name[0]}
                                 </div>
-                                <div className="flex flex-col">
-                                    <h4 className="font-bold text-primary">{testimonial.name}</h4>
-                                    <p className="text-xs text-secondary font-medium uppercase tracking-wider">{testimonial.role} — {testimonial.location}</p>
+                                <div className="flex flex-col text-center sm:text-left">
+                                    <h4 className="font-bold text-sm sm:text-base text-primary">{testimonial.name}</h4>
+                                    <p className="text-[10px] sm:text-xs text-secondary font-medium uppercase tracking-wider">{testimonial.role} — {testimonial.location}</p>
                                 </div>
                             </div>
                         </motion.div>

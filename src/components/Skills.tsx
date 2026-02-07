@@ -20,32 +20,32 @@ const Skills = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: false }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">My <span className="text-accent">Skills</span></h2>
-                    <p className="text-secondary max-w-2xl mx-auto">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">My <span className="text-accent">Skills</span></h2>
+                    <p className="text-secondary max-w-2xl mx-auto text-sm sm:text-base">
                         Technologies and tools I use to build powerful, scalable, and intelligent digital solutions.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     {skills.map((skill, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: false }}
-                            whileHover={{ y: -10 }}
+                            transition={{ duration: 0.5, delay: index * 0.05 }}
+                            viewport={{ once: true }}
+                            whileHover={{ y: -5 }}
                             className="bg-card border border-slate-100 dark:border-slate-800 p-6 rounded-3xl group shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                         >
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="w-12 h-12 flex items-center justify-center bg-section rounded-2xl group-hover:bg-accent/10 transition-colors">
                                     <Image src={skill.icon} alt={skill.name} width={30} height={30} className="object-contain dark:invert" />
                                 </div>
-                                <h3 className="font-bold text-lg text-primary">{skill.name}</h3>
+                                <h3 className="font-bold text-base sm:text-lg text-primary">{skill.name}</h3>
                             </div>
 
                             <div className="space-y-2">
@@ -57,8 +57,8 @@ const Skills = () => {
                                     <motion.div
                                         initial={{ width: 0 }}
                                         whileInView={{ width: `${skill.level}%` }}
-                                        transition={{ duration: 1, delay: 0.5 }}
-                                        viewport={{ once: false }}
+                                        transition={{ duration: 1, delay: 0.3 }}
+                                        viewport={{ once: true }}
                                         className="h-full bg-accent"
                                     />
                                 </div>
