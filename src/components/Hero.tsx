@@ -8,11 +8,14 @@ import Image from "next/image";
 
 const Hero = () => {
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
+            y: 0,
             transition: {
-                staggerChildren: 0.2,
+                duration: 0.6,
+                staggerChildren: 0.15,
+                ease: "easeOut"
             },
         },
     };
@@ -24,19 +27,13 @@ const Hero = () => {
 
     return (
         <section id="home" className="min-h-screen pt-32 pb-20 px-6 overflow-hidden">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.2 }}
-                className="container mx-auto grid md:grid-cols-2 gap-12 items-center"
-            >
+            <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
                 {/* Left Content */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: false, amount: 0.1 }}
                     className="flex flex-col gap-6"
                 >
                     <motion.div variants={itemVariants} className="flex gap-4 text-secondary">
@@ -95,12 +92,11 @@ const Hero = () => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="relative flex justify-center items-center"
                 >
                     <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
-                        {/* Floating 3D Elements Placeholder or actual Image */}
                         <motion.div
                             animate={{ y: [0, -20, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -141,7 +137,7 @@ const Hero = () => {
                         </motion.div>
                     </div>
                 </motion.div>
-            </motion.div>
+            </div>
         </section>
     );
 };
