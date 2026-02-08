@@ -17,10 +17,10 @@ const Skills = () => {
     return (
         <section id="skills" className="py-24 px-6 bg-background transition-colors duration-300">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.25 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
@@ -32,13 +32,8 @@ const Skills = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     {skills.map((skill, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.05 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -5 }}
                             className="bg-card border border-slate-100 dark:border-slate-800 p-6 rounded-3xl group shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                         >
                             <div className="flex items-center gap-4 mb-6">
@@ -58,12 +53,12 @@ const Skills = () => {
                                         initial={{ width: 0 }}
                                         whileInView={{ width: `${skill.level}%` }}
                                         transition={{ duration: 1, delay: 0.3 }}
-                                        viewport={{ once: true }}
+                                        viewport={{ once: false }}
                                         className="h-full bg-accent"
                                     />
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </motion.div>

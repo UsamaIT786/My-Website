@@ -9,10 +9,10 @@ const Contact = () => {
     return (
         <section id="contact" className="py-24 px-6 relative bg-background transition-colors duration-300">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.25 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
@@ -24,13 +24,7 @@ const Contact = () => {
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Avatar Illustration */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="flex justify-center order-2 md:order-1"
-                    >
+                    <div className="flex justify-center order-2 md:order-1">
                         <div className="relative w-full max-w-[350px] md:max-w-[450px]">
                             <Image
                                 src="/1.png"
@@ -44,16 +38,10 @@ const Contact = () => {
                                 <Send size={20} className="text-white" />
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Contact Form */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="order-1 md:order-2 bg-card border border-slate-100 dark:border-slate-800 p-6 sm:p-8 md:p-12 rounded-[32px] sm:rounded-[40px] shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
-                    >
+                    <div className="order-1 md:order-2 bg-card border border-slate-100 dark:border-slate-800 p-6 sm:p-8 md:p-12 rounded-[32px] sm:rounded-[40px] shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300">
                         <form className="space-y-4 sm:space-y-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-2">
@@ -104,7 +92,7 @@ const Contact = () => {
                                 Send Message
                             </motion.button>
                         </form>
-                    </motion.div>
+                    </div>
                 </div>
             </motion.div>
         </section>

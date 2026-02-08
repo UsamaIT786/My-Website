@@ -61,10 +61,10 @@ const Projects = () => {
     return (
         <section id="projects" className="py-24 px-6 bg-section transition-colors duration-300">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.25 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
@@ -76,12 +76,8 @@ const Projects = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.05 }}
-                            viewport={{ once: true }}
                             className="bg-card rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 group shadow-md sm:shadow-lg shadow-gray-200/50 dark:shadow-none transition-all duration-300"
                         >
                             <div className="relative h-52 sm:h-60 overflow-hidden">
@@ -121,7 +117,7 @@ const Projects = () => {
                                     </Link>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
@@ -132,12 +128,7 @@ const Projects = () => {
                 </div>
 
                 {/* Freelance Focus Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-24 sm:mt-32 p-8 sm:p-12 rounded-[32px] sm:rounded-[40px] bg-card border border-slate-100 dark:border-slate-800 text-center shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
-                >
+                <div className="mt-24 sm:mt-32 p-8 sm:p-12 rounded-[32px] sm:rounded-[40px] bg-card border border-slate-100 dark:border-slate-800 text-center shadow-2xl shadow-gray-200/50 dark:shadow-none transition-all duration-300">
                     <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-primary">Looking for a reliable freelancer?</h3>
                     <p className="text-secondary max-w-3xl mx-auto text-base sm:text-lg leading-relaxed mb-10">
                         I help businesses and individuals bring their ideas to life with high-quality, scalable, and secure web solutions. Let’s discuss your project and turn your vision into reality.
@@ -145,7 +136,7 @@ const Projects = () => {
                     <Link href="#contact" className="inline-block w-full sm:w-auto px-12 py-5 bg-accent text-white rounded-full font-bold hover:bg-accent-hover transition-all accent-glow uppercase tracking-widest text-xs sm:text-sm">
                         Let’s Build Your Project
                     </Link>
-                </motion.div>
+                </div>
             </motion.div>
         </section>
     );

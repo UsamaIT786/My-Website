@@ -53,10 +53,10 @@ const Testimonials = () => {
     return (
         <section id="testimonials" className="py-24 px-6 bg-section transition-colors duration-300 overflow-hidden">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.25 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">
@@ -68,13 +68,8 @@ const Testimonials = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.05 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -5 }}
                             className="bg-card p-6 sm:p-8 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-xl shadow-gray-200/50 dark:shadow-none relative group transition-all duration-300"
                         >
                             <Quote className="absolute top-6 right-8 text-accent/10 group-hover:text-accent/20 transition-colors hidden sm:block" size={40} />
@@ -98,7 +93,7 @@ const Testimonials = () => {
                                     <p className="text-[10px] sm:text-xs text-secondary font-medium uppercase tracking-wider">{testimonial.role} — {testimonial.location}</p>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </motion.div>

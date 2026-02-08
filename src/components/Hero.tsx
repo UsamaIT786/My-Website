@@ -25,17 +25,18 @@ const Hero = () => {
     return (
         <section id="home" className="min-h-screen pt-32 pb-20 px-6 overflow-hidden">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.2 }}
                 className="container mx-auto grid md:grid-cols-2 gap-12 items-center"
             >
                 {/* Left Content */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
-                    animate="visible"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
                     className="flex flex-col gap-6"
                 >
                     <motion.div variants={itemVariants} className="flex gap-4 text-secondary">
@@ -93,8 +94,9 @@ const Hero = () => {
                 {/* Right Illustration */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="relative flex justify-center items-center"
                 >
                     <div className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px]">
@@ -115,26 +117,26 @@ const Hero = () => {
                             />
                         </motion.div>
 
-                        {/* Background Glow - Optimized for mobile */}
+                        {/* Background Glow */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 blur-[60px] md:blur-[100px] rounded-full -z-10" />
 
-                        {/* Floating Tech Icons - Simplified rotation for mobile */}
+                        {/* Floating Tech Icons */}
                         <motion.div
                             animate={{ rotate: 360 }}
                             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 left-0 w-full h-full pointer-events-none hidden sm:block"
+                            className="absolute top-0 left-0 w-full h-full pointer-events-none"
                         >
-                            <div className="absolute top-[10%] left-[10%] p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
-                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width={30} height={30} alt="React" />
+                            <div className="absolute top-[10%] left-[10%] p-2 sm:p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width={25} height={25} alt="React" className="sm:w-[30px] sm:h-[30px]" />
                             </div>
-                            <div className="absolute top-[20%] right-[5%] p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
-                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width={30} height={30} alt="Next.js" className="dark:invert" />
+                            <div className="absolute top-[20%] right-[5%] p-2 sm:p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" width={25} height={25} alt="Next.js" className="dark:invert sm:w-[30px] sm:h-[30px]" />
                             </div>
-                            <div className="absolute bottom-[20%] left-[5%] p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
-                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width={30} height={30} alt="Tailwind" />
+                            <div className="absolute bottom-[20%] left-[5%] p-2 sm:p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width={25} height={25} alt="Tailwind" className="sm:w-[30px] sm:h-[30px]" />
                             </div>
-                            <div className="absolute bottom-[10%] right-[10%] p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
-                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width={30} height={30} alt="JS" />
+                            <div className="absolute bottom-[10%] right-[10%] p-2 sm:p-3 bg-card border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+                                <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width={25} height={25} alt="JS" className="sm:w-[30px] sm:h-[30px]" />
                             </div>
                         </motion.div>
                     </div>

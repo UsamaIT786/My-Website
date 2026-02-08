@@ -7,22 +7,22 @@ import Link from "next/link";
 
 const StatCounter = ({ value, label, color }: { value: string; label: string; color: string }) => {
     const ref = React.useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { once: true, amount: 0.5 });
+    const inView = useInView(ref, { once: false, amount: 0.5 });
     const [count, setCount] = React.useState(0);
     const target = parseInt(value);
-    const [hasAnimated, setHasAnimated] = React.useState(false);
 
     React.useEffect(() => {
-        if (inView && !hasAnimated) {
+        if (inView) {
             const controls = animate(0, target, {
-                duration: 2,
+                duration: 1.5,
                 ease: "easeOut",
                 onUpdate: (latest) => setCount(Math.floor(latest)),
             });
-            setHasAnimated(true);
             return () => controls.stop();
+        } else {
+            setCount(0);
         }
-    }, [inView, target, hasAnimated]);
+    }, [inView, target]);
 
     return (
         <div ref={ref} className="text-center">
@@ -46,21 +46,15 @@ const About = () => {
     return (
         <section id="about" className="py-24 px-6 relative overflow-hidden bg-section transition-colors duration-300">
             <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.25 }}
                 className="container mx-auto"
             >
                 <div className="glass-card rounded-[40px] p-6 sm:p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center">
                     {/* Illustration */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: true }}
-                        className="flex justify-center order-2 md:order-1"
-                    >
+                    <div className="flex justify-center order-2 md:order-1">
                         <div className="relative w-full max-w-[300px] md:max-w-[400px]">
                             <Image
                                 src="/1.png"
@@ -73,16 +67,10 @@ const About = () => {
                             {/* Decorative elements */}
                             <div className="absolute -top-5 -right-5 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-accent/20 blur-[40px] md:blur-[60px] rounded-full" />
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Text Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: true }}
-                        className="order-1 md:order-2 text-center md:text-left"
-                    >
+                    <div className="order-1 md:order-2 text-center md:text-left">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-primary">About Me</h2>
                         <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8">
                             I’m Usama Muzammil, a passionate Full Stack Web Developer and AI Engineer with hands-on experience in building modern web applications and intelligent systems. I work as a freelancer, helping startups and businesses create reliable, high-performing, and visually engaging digital products.
@@ -99,7 +87,7 @@ const About = () => {
                                 View My Work
                             </button>
                         </Link>
-                    </motion.div>
+                    </div>
                 </div>
             </motion.div>
         </section>
