@@ -35,12 +35,12 @@ const Footer = () => {
                 </p>
             </div>
 
-            <div className="container mx-auto mt-8 flex justify-center gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-secondary">
-                <a href="#home" className="hover:text-accent transition-colors">Home</a>
-                <a href="#about" className="hover:text-accent transition-colors">About</a>
-                <a href="#skills" className="hover:text-accent transition-colors">Skills</a>
-                <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
-                <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
+            <div className="container mx-auto mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-[11px] sm:text-xs uppercase tracking-[0.15em] font-bold text-secondary text-center">
+                <a href="#home" className="hover:text-accent transition-colors py-1">Home</a>
+                <a href="#about" className="hover:text-accent transition-colors py-1">About</a>
+                <a href="#skills" className="hover:text-accent transition-colors py-1">Skills</a>
+                <a href="#projects" className="hover:text-accent transition-colors py-1">Projects</a>
+                <a href="#contact" className="hover:text-accent transition-colors py-1">Contact</a>
             </div>
         </footer>
     );
