@@ -35,7 +35,7 @@ const Footer = () => {
                 </p>
             </div>
 
-            <div className="container mx-auto mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-[11px] sm:text-xs uppercase tracking-[0.15em] font-bold text-secondary text-center">
+            <div className="container mx-auto mt-10 flex  justify-center gap-x-4 gap-y-1 text-[11px] sm:text-xs uppercase tracking-[0.15em] font-bold text-secondary text-center">
                 <a href="#home" className="hover:text-accent transition-colors py-1">Home</a>
                 <a href="#about" className="hover:text-accent transition-colors py-1">About</a>
                 <a href="#skills" className="hover:text-accent transition-colors py-1">Skills</a>
