@@ -51,12 +51,12 @@ const testimonials = [
 
 const Testimonials = () => {
     return (
-        <section id="testimonials" className="py-24 px-6 bg-section transition-colors duration-300 overflow-hidden">
+        <section id="testimonials" className="py-24 px-6 bg-section transition-colors duration-300">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.1 }}
+                viewport={{ once: false, amount: 0.05 }}
                 className="container mx-auto"
             >
                 <div className="text-center mb-16">

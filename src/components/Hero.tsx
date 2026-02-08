@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Hero = () => {
-    const containerVariants = {
+    const containerVariants: any = {
         hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
@@ -26,14 +26,14 @@ const Hero = () => {
     };
 
     return (
-        <section id="home" className="min-h-screen pt-32 pb-20 px-6 overflow-hidden">
+        <section id="home" className="pt-32 pb-20 px-6">
             <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
                 {/* Left Content */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.1 }}
+                    viewport={{ once: false, amount: 0.05 }}
                     className="flex flex-col gap-6"
                 >
                     <motion.div variants={itemVariants} className="flex gap-4 text-secondary">
