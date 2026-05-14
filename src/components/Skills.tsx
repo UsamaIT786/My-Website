@@ -18,27 +18,27 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-section">
+    <section id="skills" className="py-16 md:py-32 px-4 md:px-6 relative overflow-hidden bg-section">
       <div className="bg-glow bottom-[-10%] right-[-10%]" />
       
-      <div className="container mx-auto relative z-10">
-        <div className="text-center mb-24">
+      <div className="container mx-auto relative z-10 px-0 md:px-6">
+        <div className="text-center mb-10 md:mb-24">
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-accent font-bold tracking-[0.3em] uppercase text-sm mb-4 block"
+            className="text-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-sm mb-3 md:mb-4 block"
           >
             Skills
           </motion.span>
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
+          <h2 className="text-2xl md:text-6xl font-black text-white mb-4 md:mb-6">
             My <span className="text-gradient">Expertise</span>
           </h2>
-          <p className="text-secondary max-w-2xl mx-auto text-lg">
+          <p className="text-secondary max-w-2xl mx-auto text-base md:text-lg px-4">
             &quot;Mastering the latest technologies to build high-performance digital products.&quot;
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={index}
@@ -46,19 +46,19 @@ const Skills = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -10 }}
-              className="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] flex flex-col items-center justify-center text-center group"
+              className="glass-card p-5 md:p-10 rounded-[24px] md:rounded-[40px] flex flex-col items-center justify-center text-center group"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-accent/5 rounded-2xl md:rounded-3xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-accent/20 transition-all duration-500 group-hover:rotate-6">
+              <div className="w-12 h-12 md:w-20 md:h-20 bg-accent/5 rounded-xl md:rounded-3xl flex items-center justify-center mb-3 md:mb-6 group-hover:bg-accent/20 transition-all duration-500 group-hover:rotate-6">
                 <Image
                   src={skill.icon}
                   alt={skill.name}
-                  width={40}
-                  height={40}
-                  className={`object-contain ${skill.name === "Next.js" ? "invert" : ""}`}
+                  width={32}
+                  height={32}
+                  className={`object-contain md:w-[50px] md:h-[50px] ${skill.name === "Next.js" ? "invert" : ""}`}
                 />
               </div>
-              <div className="text-accent font-black text-xl md:text-2xl mb-1 md:mb-2">{skill.level}%</div>
-              <h3 className="text-secondary font-bold text-xs md:text-sm uppercase tracking-widest group-hover:text-white transition-colors">
+              <div className="text-accent font-black text-lg md:text-2xl mb-1 md:mb-2">{skill.level}%</div>
+              <h3 className="text-secondary font-bold text-[10px] md:text-sm uppercase tracking-widest group-hover:text-white transition-colors">
                 {skill.name}
               </h3>
             </motion.div>
