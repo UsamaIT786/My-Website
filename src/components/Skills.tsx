@@ -38,7 +38,7 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={index}
@@ -46,19 +46,19 @@ const Skills = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ y: -10 }}
-              className="glass-card p-10 rounded-[40px] flex flex-col items-center justify-center text-center group"
+              className="glass-card p-6 md:p-10 rounded-[30px] md:rounded-[40px] flex flex-col items-center justify-center text-center group"
             >
-              <div className="w-20 h-20 bg-accent/5 rounded-3xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-500 group-hover:rotate-6">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-accent/5 rounded-2xl md:rounded-3xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-accent/20 transition-all duration-500 group-hover:rotate-6">
                 <Image
                   src={skill.icon}
                   alt={skill.name}
-                  width={50}
-                  height={50}
+                  width={40}
+                  height={40}
                   className={`object-contain ${skill.name === "Next.js" ? "invert" : ""}`}
                 />
               </div>
-              <div className="text-accent font-black text-2xl mb-2">{skill.level}%</div>
-              <h3 className="text-secondary font-bold text-sm uppercase tracking-widest group-hover:text-white transition-colors">
+              <div className="text-accent font-black text-xl md:text-2xl mb-1 md:mb-2">{skill.level}%</div>
+              <h3 className="text-secondary font-bold text-xs md:text-sm uppercase tracking-widest group-hover:text-white transition-colors">
                 {skill.name}
               </h3>
             </motion.div>

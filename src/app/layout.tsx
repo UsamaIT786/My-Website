@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: "Senior Full Stack Web Developer & AI Engineer",
   icons: {
     icon: [
-      { url: "/icon.png", sizes: "32x32" },
-      { url: "/icon.png", sizes: "64x64" },
-      { url: "/icon.png", sizes: "128x128" },
+      { url: "/icon.png", sizes: "256x256" },
+      { url: "/icon.png", sizes: "512x512" },
+      { url: "/icon.png", sizes: "256x256" },
     ],
     apple: "/icon.png",
   },
