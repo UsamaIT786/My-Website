@@ -5,31 +5,29 @@ import { motion, useInView, animate } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-const StatCounter = ({ value, label, color }: { value: string; label: string; color: string }) => {
+const StatCounter = ({ value, label }: { value: string; label: string }) => {
     const ref = React.useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { once: false, amount: 0.5 });
+    const inView = useInView(ref, { once: true, amount: 0.5 });
     const [count, setCount] = React.useState(0);
     const target = parseInt(value);
 
     React.useEffect(() => {
         if (inView) {
             const controls = animate(0, target, {
-                duration: 1.5,
+                duration: 2,
                 ease: "easeOut",
                 onUpdate: (latest) => setCount(Math.floor(latest)),
             });
             return () => controls.stop();
-        } else {
-            setCount(0);
         }
     }, [inView, target]);
 
     return (
-        <div ref={ref} className="text-center">
-            <div className={`text-2xl sm:text-3xl font-bold ${color} mb-1 transition-transform hover:scale-110`}>
+        <div ref={ref} className="text-center md:text-left">
+            <div className="text-4xl md:text-5xl font-black text-white mb-2">
                 {count}{value.includes("+") ? "+" : ""}
             </div>
-            <div className="text-secondary text-[10px] sm:text-xs md:text-sm uppercase tracking-wider">
+            <div className="text-secondary text-sm uppercase tracking-[0.2em] font-bold">
                 {label}
             </div>
         </div>
@@ -38,58 +36,72 @@ const StatCounter = ({ value, label, color }: { value: string; label: string; co
 
 const About = () => {
     const stats = [
-        { label: "Experience", value: "3+", color: "text-accent" },
-        { label: "Projects Completed", value: "50+", color: "text-accent" },
-        { label: "Happy Clients", value: "20+", color: "text-accent" },
+        { label: "Years Experience", value: "3+" },
+        { label: "Projects Completed", value: "20+" },
+        { label: "Happy Clients", value: "10" },
     ];
 
+
     return (
-        <section id="about" className="py-24 px-6 relative bg-section transition-colors duration-300">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.05 }}
-                className="container mx-auto"
-            >
-                <div className="glass-card rounded-[40px] p-6 sm:p-8 md:p-16 grid md:grid-cols-2 gap-12 items-center">
-                    {/* Illustration */}
-                    <div className="flex justify-center order-2 md:order-1">
-                        <div className="relative w-full max-w-[300px] md:max-w-[400px]">
+        <section id="about" className="py-32 px-6 relative overflow-hidden">
+            <div className="bg-glow top-[20%] left-[-10%]" />
+            
+            <div className="container mx-auto relative z-10">
+                <div className="grid lg:grid-cols-2 gap-20 items-center">
+                    {/* Image Area */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="relative"
+                    >
+                        <div className="relative z-10 rounded-[60px] overflow-hidden border-2 border-white/5 p-4 bg-[#140b27]/50 backdrop-blur-xl">
                             <Image
                                 src="/1.png"
-                                alt="About Me Illustration"
-                                width={500}
-                                height={500}
-                                className="object-contain"
-                                sizes="(max-width: 768px) 300px, 500px"
+                                alt="Usama Muzammil"
+                                width={600}
+                                height={600}
+                                className="object-contain drop-shadow-[0_20px_50px_rgba(135,80,247,0.2)]"
                             />
-                            {/* Decorative elements */}
-                            <div className="absolute -top-5 -right-5 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-accent/20 blur-[40px] md:blur-[60px] rounded-full" />
                         </div>
-                    </div>
+                        <div className="absolute -bottom-10 -right-10 w-full h-full border-2 border-accent/20 rounded-[60px] -z-10" />
+                    </motion.div>
 
                     {/* Text Content */}
-                    <div className="order-1 md:order-2 text-center md:text-left">
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-primary">About Me</h2>
-                        <p className="text-secondary text-base sm:text-lg leading-relaxed mb-8">
-                            I’m Usama Muzammil, a passionate Full Stack Web Developer and AI Engineer with hands-on experience in building modern web applications and intelligent systems. I work as a freelancer, helping startups and businesses create reliable, high-performing, and visually engaging digital products.
+                    <div>
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="text-accent font-bold tracking-[0.3em] uppercase text-sm mb-6 block"
+                        >
+                            About Me
+                        </motion.span>
+                        <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+                            I Can Design & Build <br />
+                            <span className="text-gradient">Anything</span> You Need.
+                        </h2>
+                        <p className="text-secondary text-lg leading-relaxed mb-12">
+                            I am Usama Muzammil, a Full Stack Developer & AI Engineer based in Pakistan. With a passion for creating high-end digital experiences, I specialize in building scalable, intelligent, and visually stunning applications that drive results.
                         </p>
 
-                        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
                             {stats.map((stat, index) => (
                                 <StatCounter key={index} {...stat} />
                             ))}
                         </div>
 
-                        <Link href="#projects">
-                            <button className="w-full sm:w-auto px-10 py-4 bg-transparent border border-accent text-accent rounded-full font-bold hover:bg-accent hover:text-white transition-all shadow-lg shadow-accent/10">
-                                View My Work
-                            </button>
-                        </Link>
+                        <div className="flex flex-wrap gap-6">
+                            <Link href="/contact" className="btn-primary">
+                                Let&apos;s Talk
+                            </Link>
+                            <Link href="/portfolio" className="btn-outline">
+                                View Portfolio
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
-            </motion.div>
+            </div>
         </section>
     );
 };

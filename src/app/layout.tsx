@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
+const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
-  title: "Usama Muzammil | Full Stack Web Developer & AI Engineer",
-  description: "Professional portfolio of Usama Muzammil, showcasing advanced frontend development, backend systems, and AI-driven solutions.",
+  title: "Usama Muzammil | Portfolio",
+  description: "Senior Full Stack Web Developer & AI Engineer",
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "32x32" },
+      { url: "/icon.png", sizes: "64x64" },
+      { url: "/icon.png", sizes: "128x128" },
+    ],
+    apple: "/icon.png",
+  },
 };
 
+
 export const viewport = {
-  themeColor: "#FF8C1A",
+  themeColor: "#8750f7",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -25,30 +33,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  if (theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body
-        className={`${outfit.variable} font-sans antialiased bg-background text-primary transition-colors duration-300`}
-      >
-        {children}
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`} suppressHydrationWarning>
+        <Preloader />
+        <div className="mesh-bg" />
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
 }
+

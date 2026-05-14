@@ -5,100 +5,87 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
 const testimonials = [
-    {
-        name: "Ahmed Raza",
-        role: "Business Owner",
-        location: "Karachi, Pakistan",
-        feedback: "Usama delivered exactly what I needed. The website performance, design, and overall experience exceeded my expectations. Communication was clear, and the project was completed on time. Highly recommended for any professional web development work.",
-        stars: 5,
-    },
-    {
-        name: "Michael Thompson",
-        role: "Product Manager",
-        location: "Texas, USA",
-        feedback: "Usama is a highly skilled developer who knows how to turn ideas into real products. The project was smooth, well-structured, and delivered with excellent quality. I would definitely work with him again.",
-        stars: 5,
-    },
-    {
-        name: "James Walker",
-        role: "Digital Consultant",
-        location: "London, UK",
-        feedback: "Usama’s expertise in web development and AI integration is impressive. He delivered a clean, fast, and scalable solution while maintaining excellent communication throughout the project.",
-        stars: 5,
-    },
-    {
-        name: "Salman Khan",
-        role: "Startup Founder",
-        location: "Lahore, Pakistan",
-        feedback: "Working with Usama was a great experience. He understands requirements quickly and delivers clean, scalable solutions. His attention to detail and commitment to quality really stood out.",
-        stars: 5,
-    },
-    {
-        name: "Jessica Miller",
-        role: "Entrepreneur",
-        location: "California, USA",
-        feedback: "Professional, reliable, and extremely talented. Usama handled the project with great care and delivered a modern, high-quality web application that matched our business goals perfectly.",
-        stars: 5,
-    },
-    {
-        name: "Oliver Smith",
-        role: "Agency Owner",
-        location: "Manchester, UK",
-        feedback: "Outstanding work quality and professionalism. Usama understands both technical and business needs, which makes him a great developer to work with. Highly recommended.",
-        stars: 5,
-    },
+  {
+    name: "Umair Ahmed",
+    role: "Legal Consultant, UK",
+    feedback: "Usama's work on ImmigrationLaw.org.uk was exceptional. He delivered a high-performance, SEO-optimized platform that perfectly meets our complex requirements. Highly recommended for premium projects.",
+    stars: 5,
+  },
+  {
+    name: "Choudry Raza Hussain",
+    role: "AI Solutions Architect, Pakistan",
+    feedback: "The AI Engineer portal exceeded all expectations. Usama's deep understanding of WordPress and AI integration is evident in the final product. A truly world-class developer.",
+    stars: 5,
+  },
+  {
+    name: "Michael Thompson",
+    role: "Product Manager",
+    feedback: "Highly skilled developer who knows how to turn ideas into real products. The project was smooth and well-structured.",
+    stars: 5,
+  },
 ];
 
 const Testimonials = () => {
-    return (
-        <section id="testimonials" className="py-24 px-6 bg-section transition-colors duration-300">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.05 }}
-                className="container mx-auto"
+  return (
+    <section id="testimonials" className="py-32 px-6 relative overflow-hidden bg-section">
+      <div className="bg-glow top-[10%] left-[10%]" />
+      
+      <div className="container mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div>
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="text-accent font-bold tracking-[0.3em] uppercase text-sm mb-6 block"
             >
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">Client <span className="text-accent">Testimonials</span></h2>
-                    <p className="text-secondary max-w-2xl mx-auto text-sm sm:text-base">
-                        Don&apos;t just take my word for it. Here&apos;s what business owners and founders around the world have to say about my work.
-                    </p>
+              Testimonials
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight">
+              Client <br />
+              <span className="text-gradient">Success Stories</span>
+            </h2>
+            <p className="text-secondary text-lg leading-relaxed mb-10 max-w-xl">
+              Trusted by professionals in the UK, Pakistan, and beyond to deliver elite digital excellence.
+            </p>
+          </div>
+
+          <div className="grid gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="glass-card p-10 rounded-[40px] relative group"
+              >
+                <Quote className="absolute top-8 right-10 text-accent/10 group-hover:text-accent/30 transition-all duration-500 scale-150" size={32} />
+                
+                <div className="flex gap-1 mb-6">
+                  {[...Array(testimonial.stars)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-accent text-accent" />
+                  ))}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {testimonials.map((testimonial, index) => (
-                        <div
-                            key={index}
-                            className="bg-card p-6 sm:p-8 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-xl shadow-gray-200/50 dark:shadow-none relative group transition-all duration-300"
-                        >
-                            <Quote className="absolute top-6 right-8 text-accent/10 group-hover:text-accent/20 transition-colors hidden sm:block" size={40} />
+                <p className="text-secondary italic mb-8 text-lg leading-relaxed">
+                  &quot;{testimonial.feedback}&quot;
+                </p>
 
-                            <div className="flex gap-1 mb-6 justify-center sm:justify-start">
-                                {[...Array(testimonial.stars)].map((_, i) => (
-                                    <Star key={i} size={14} className="fill-accent text-accent" />
-                                ))}
-                            </div>
-
-                            <p className="text-secondary italic mb-8 leading-relaxed relative z-10 text-sm sm:text-base text-center sm:text-left">
-                                &quot;{testimonial.feedback}&quot;
-                            </p>
-
-                            <div className="flex items-center gap-4 justify-center sm:justify-start">
-                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent font-bold text-lg sm:text-xl uppercase">
-                                    {testimonial.name[0]}
-                                </div>
-                                <div className="flex flex-col text-center sm:text-left">
-                                    <h4 className="font-bold text-sm sm:text-base text-primary">{testimonial.name}</h4>
-                                    <p className="text-[10px] sm:text-xs text-secondary font-medium uppercase tracking-wider">{testimonial.role} — {testimonial.location}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-black text-xl shadow-lg shadow-accent/20">
+                    {testimonial.name[0]}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white group-hover:text-accent transition-colors">{testimonial.name}</h4>
+                    <p className="text-xs text-secondary font-bold uppercase tracking-widest">{testimonial.role}</p>
+                  </div>
                 </div>
-            </motion.div>
-        </section>
-    );
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Testimonials;

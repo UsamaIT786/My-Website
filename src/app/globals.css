@@ -1,95 +1,142 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #F8FAFC;
-  --color-section: #F1F5F9;
-  --color-card: #FFFFFF;
-  --color-primary: #0F172A;
-  --color-secondary: #475569;
-  --color-accent: #FF8C1A;
-  --color-accent-hover: #FFA94D;
-
-  --color-primary-accent: #FF8C1A;
-  /* For backward compatibility if needed */
-}
-
-.dark {
-  --color-background: #020617;
-  --color-section: #0B1120;
-  --color-card: rgba(15, 23, 42, 0.65);
-  --color-primary: #FFFFFF;
-  --color-secondary: #E5E7EB;
+  --color-background: #070707;
+  --color-section: #0f0715;
+  --color-card: #140b27;
+  --color-primary: #ffffff;
+  --color-secondary: #dddddd;
+  --color-accent: #8750f7;
+  --color-accent-hover: #9b6bff;
+  --color-primary-accent: #8750f7;
 }
 
 :root {
-  --background: #F8FAFC;
-  --foreground: #0F172A;
-}
-
-.dark {
-  --background: #020617;
-  --foreground: #FFFFFF;
+  --background: #070707;
+  --foreground: #ffffff;
+  --accent: #8750f7;
+  --accent-secondary: #2a1454;
+  --accent-glow: rgba(135, 80, 247, 0.5);
 }
 
 * {
   scroll-behavior: smooth;
-}
-
-section {
-  scroll-margin-top: 100px;
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
 }
 
-/* Custom Scrollbar */
+/* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #070707;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
+  background: linear-gradient(to bottom, #8750f7, #2a1454);
   border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-hover);
+/* Glassmorphism Card */
+.glass-card {
+  background: #140b27;
+  border: 1px solid #2a1454;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.glass-card {
-  background: var(--color-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 140, 26, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+.glass-card:hover {
+  border-color: #8750f7;
+  background: #1d1136;
+  box-shadow: 0 10px 40px rgba(135, 80, 247, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Premium Text Gradient */
+.text-gradient {
+  background: linear-gradient(to right, #8750f7 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Cinematic Background Glows */
+.bg-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(135, 80, 247, 0.15) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Magnetic Button Utility */
+.btn-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #8750f7, #9b6bff);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(135, 80, 247, 0.4);
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  border: 1px solid #8750f7;
+  color: #8750f7;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
-.dark .glass-card {
-  background: var(--color-card);
-  border: 1px solid rgba(255, 140, 26, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.btn-outline:hover {
+  background: #8750f7;
+  color: white;
 }
 
-.accent-glow {
-  box-shadow: 0 0 20px rgba(255, 140, 26, 0.2);
+/* Hero Title Animation Classes */
+.char-reveal {
+  overflow: hidden;
+  display: inline-block;
 }
 
-.dark .accent-glow {
-  box-shadow: 0 0 30px rgba(255, 140, 26, 0.4);
-}
-
-.text-gradient {
-  background: linear-gradient(to right, #FF8C1A, #FFA94D);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Custom Mesh Background */
+.mesh-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: 
+    radial-gradient(at 0% 0%, #0f0715 0px, transparent 50%),
+    radial-gradient(at 100% 0%, #070707 0px, transparent 50%),
+    radial-gradient(at 100% 100%, #140b27 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #070707 0px, transparent 50%);
 }

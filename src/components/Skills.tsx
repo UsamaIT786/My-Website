@@ -5,65 +5,68 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const skills = [
-    { name: "Frontend Development", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "Backend Development", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "API Development", level: 88, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-    { name: "Database Design", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-    { name: "AI Integration", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-    { name: "Automation & Optimization", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+  { name: "Next.js", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "React", level: 98, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "TypeScript", level: 92, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "Node.js", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "MongoDB", level: 88, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+  { name: "WordPress", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" },
+  { name: "Tailwind CSS", level: 98, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "GSAP", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "Framer Motion", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
 ];
 
 const Skills = () => {
-    return (
-        <section id="skills" className="py-24 px-6 bg-background transition-colors duration-300">
+  return (
+    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-section">
+      <div className="bg-glow bottom-[-10%] right-[-10%]" />
+      
+      <div className="container mx-auto relative z-10">
+        <div className="text-center mb-24">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-accent font-bold tracking-[0.3em] uppercase text-sm mb-4 block"
+          >
+            Skills
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
+            My <span className="text-gradient">Expertise</span>
+          </h2>
+          <p className="text-secondary max-w-2xl mx-auto text-lg">
+            &quot;Mastering the latest technologies to build high-performance digital products.&quot;
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          {skills.map((skill, index) => (
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                viewport={{ once: false, amount: 0.05 }}
-                className="container mx-auto"
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.05 }}
+              whileHover={{ y: -10 }}
+              className="glass-card p-10 rounded-[40px] flex flex-col items-center justify-center text-center group"
             >
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-primary">My <span className="text-accent">Skills</span></h2>
-                    <p className="text-secondary max-w-2xl mx-auto text-sm sm:text-base">
-                        Technologies and tools I use to build powerful, scalable, and intelligent digital solutions.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                    {skills.map((skill, index) => (
-                        <div
-                            key={index}
-                            className="bg-card border border-slate-100 dark:border-slate-800 p-6 rounded-3xl group shadow-xl shadow-gray-200/50 dark:shadow-none transition-all duration-300"
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 flex items-center justify-center bg-section rounded-2xl group-hover:bg-accent/10 transition-colors">
-                                    <Image src={skill.icon} alt={skill.name} width={30} height={30} className="object-contain dark:invert" />
-                                </div>
-                                <h3 className="font-bold text-base sm:text-lg text-primary">{skill.name}</h3>
-                            </div>
-
-                            <div className="space-y-2">
-                                <div className="flex justify-between text-xs text-secondary">
-                                    <span>Proficiency</span>
-                                    <span className="text-accent font-bold">{skill.level}%</span>
-                                </div>
-                                <div className="h-2 w-full bg-section rounded-full overflow-hidden">
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: `${skill.level}%` }}
-                                        transition={{ duration: 1, delay: 0.3 }}
-                                        viewport={{ once: false }}
-                                        className="h-full bg-accent"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+              <div className="w-20 h-20 bg-accent/5 rounded-3xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-all duration-500 group-hover:rotate-6">
+                <Image
+                  src={skill.icon}
+                  alt={skill.name}
+                  width={50}
+                  height={50}
+                  className={`object-contain ${skill.name === "Next.js" ? "invert" : ""}`}
+                />
+              </div>
+              <div className="text-accent font-black text-2xl mb-2">{skill.level}%</div>
+              <h3 className="text-secondary font-bold text-sm uppercase tracking-widest group-hover:text-white transition-colors">
+                {skill.name}
+              </h3>
             </motion.div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Skills;
