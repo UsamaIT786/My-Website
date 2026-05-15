@@ -10,18 +10,18 @@ const Contact = () => {
       <div className="bg-glow top-[10%] right-[10%] opacity-50" />
       <div className="bg-glow bottom-[10%] left-[10%] opacity-30" />
       
-      <div className="container mx-auto relative z-10 px-0">
+      <div className="container mx-auto relative z-10 px-6">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-16 lg:gap-20">
           {/* Contact Info */}
           <div className="flex flex-col justify-center">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="text-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-sm mb-4 md:mb-6 block"
+              className="text-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-sm mb-3 md:mb-6 block"
             >
               Get In Touch
             </motion.span>
-            <h2 className="text-3xl md:text-7xl font-black text-white mb-4 md:mb-8 leading-[1.2]">
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-4 md:mb-8 leading-[1.2]">
               Let&apos;s Build <br className="hidden md:block" />
               <span className="text-gradient">Something Elite</span>
             </h2>

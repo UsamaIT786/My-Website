@@ -21,7 +21,7 @@ const Skills = () => {
     <section id="skills" className="py-16 md:py-32 px-4 md:px-6 relative overflow-hidden bg-section">
       <div className="bg-glow bottom-[-10%] right-[-10%]" />
       
-      <div className="container mx-auto relative z-10 px-0 md:px-6">
+      <div className="container mx-auto relative z-10 px-6">
         <div className="text-center mb-10 md:mb-24">
           <motion.span
             initial={{ opacity: 0 }}
