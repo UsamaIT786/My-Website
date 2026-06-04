@@ -2,12 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone, PhoneOff } from "lucide-react";
 import Link from "next/link";
+
+const VAPI_API_KEY = "d802bd13-fe35-4a9f-ab1a-7fcf2c458225";
+const VAPI_ASSISTANT_ID = "55fa97ec-cdba-4592-8206-fe6eb6896b09";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [callActive, setCallActive] = useState(false);
+    const [callLoading, setCallLoading] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,6 +21,55 @@ const Navbar = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Load Vapi SDK once on mount
+    useEffect(() => {
+        if (document.getElementById("vapi-script")) return;
+        const script = document.createElement("script");
+        script.id = "vapi-script";
+        script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+        script.defer = true;
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
+    const handleVapiCall = () => {
+        const sdk = (window as any).vapiSDK;
+        const instance = (window as any).vapiInstance;
+
+        if (callActive && instance) {
+            instance.stop();
+            setCallActive(false);
+            return;
+        }
+
+        if (!sdk) {
+            alert("Voice assistant is still loading, please try again in a moment.");
+            return;
+        }
+
+        setCallLoading(true);
+        const newInstance = sdk.run({
+            apiKey: VAPI_API_KEY,
+            assistant: VAPI_ASSISTANT_ID,
+            config: { position: "none" }, // no floating button
+        });
+        (window as any).vapiInstance = newInstance;
+
+        newInstance.on?.("call-start", () => {
+            setCallLoading(false);
+            setCallActive(true);
+        });
+        newInstance.on?.("call-end", () => {
+            setCallActive(false);
+            setCallLoading(false);
+        });
+        // fallback timeout
+        setTimeout(() => {
+            setCallLoading(false);
+            setCallActive(true);
+        }, 4000);
+    };
 
     const navLinks = [
         { name: "Home", href: "/home" },
@@ -54,12 +108,17 @@ const Navbar = () => {
                             {link.name}
                         </Link>
                     ))}
-                    <Link
-                        href="/contact"
-                        className="px-8 py-3 btn-primary text-sm uppercase tracking-widest"
+                    <button
+                        onClick={handleVapiCall}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
+                            callActive
+                                ? "bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30"
+                                : "btn-primary"
+                        } ${callLoading ? "opacity-70 cursor-wait" : ""}`}
                     >
-                        Hire Me
-                    </Link>
+                        {callActive ? <PhoneOff size={16} /> : <Phone size={16} />}
+                        {callLoading ? "Connecting…" : callActive ? "End Call" : "Talk to AI"}
+                    </button>
                 </div>
 
                 {/* Mobile Toggle */}
@@ -91,13 +150,17 @@ const Navbar = () => {
                                     {link.name}
                                 </Link>
                             ))}
-                            <Link
-                                href="/contact"
-                                onClick={() => setIsOpen(false)}
-                                className="btn-primary text-center py-4"
+                            <button
+                                onClick={() => { setIsOpen(false); handleVapiCall(); }}
+                                className={`flex items-center justify-center gap-2 py-4 rounded-xl text-base font-bold uppercase tracking-widest transition-all duration-300 ${
+                                    callActive
+                                        ? "bg-red-500 hover:bg-red-600 text-white"
+                                        : "btn-primary"
+                                } ${callLoading ? "opacity-70 cursor-wait" : ""}`}
                             >
-                                Hire Me
-                            </Link>
+                                {callActive ? <PhoneOff size={18} /> : <Phone size={18} />}
+                                {callLoading ? "Connecting…" : callActive ? "End Call" : "Talk to AI"}
+                            </button>
                         </div>
                     </motion.div>
                 )}
