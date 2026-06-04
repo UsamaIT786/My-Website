@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
+import VapiScript from "@/components/VapiScript";
 
 const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -39,6 +40,9 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
+
+        {/* Vapi Voice Agent Integration */}
+        <VapiScript />
       </body>
     </html>
   );
