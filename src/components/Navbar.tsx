@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, PhoneOff } from "lucide-react";
+import { Menu, X, Phone, PhoneOff, Mic } from "lucide-react";
 import Link from "next/link";
+import Vapi from "@vapi-ai/web";
 
 const VAPI_API_KEY = "d802bd13-fe35-4a9f-ab1a-7fcf2c458225";
 const VAPI_ASSISTANT_ID = "55fa97ec-cdba-4592-8206-fe6eb6896b09";
@@ -13,6 +14,8 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [callActive, setCallActive] = useState(false);
     const [callLoading, setCallLoading] = useState(false);
+    const [agentSpeaking, setAgentSpeaking] = useState(false);
+    const vapiRef = useRef<Vapi | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,53 +25,60 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Load Vapi SDK once on mount
+    // Initialize Vapi instance once on mount
     useEffect(() => {
-        if (document.getElementById("vapi-script")) return;
-        const script = document.createElement("script");
-        script.id = "vapi-script";
-        script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
-        script.defer = true;
-        script.async = true;
-        document.body.appendChild(script);
+        const vapi = new Vapi(VAPI_API_KEY);
+        vapiRef.current = vapi;
+
+        vapi.on("call-start", () => {
+            setCallLoading(false);
+            setCallActive(true);
+        });
+
+        vapi.on("call-end", () => {
+            setCallActive(false);
+            setCallLoading(false);
+            setAgentSpeaking(false);
+        });
+
+        vapi.on("speech-start", () => {
+            setAgentSpeaking(true);
+        });
+
+        vapi.on("speech-end", () => {
+            setAgentSpeaking(false);
+        });
+
+        vapi.on("error", (err: any) => {
+            console.error("Vapi error:", err);
+            setCallActive(false);
+            setCallLoading(false);
+            setAgentSpeaking(false);
+        });
+
+        return () => {
+            vapi.stop();
+        };
     }, []);
 
-    const handleVapiCall = () => {
-        const sdk = (window as any).vapiSDK;
-        const instance = (window as any).vapiInstance;
+    const handleVapiCall = async () => {
+        const vapi = vapiRef.current;
+        if (!vapi) return;
 
-        if (callActive && instance) {
-            instance.stop();
+        if (callActive) {
+            vapi.stop();
             setCallActive(false);
-            return;
-        }
-
-        if (!sdk) {
-            alert("Voice assistant is still loading, please try again in a moment.");
+            setAgentSpeaking(false);
             return;
         }
 
         setCallLoading(true);
-        const newInstance = sdk.run({
-            apiKey: VAPI_API_KEY,
-            assistant: VAPI_ASSISTANT_ID,
-            config: { position: "none" }, // no floating button
-        });
-        (window as any).vapiInstance = newInstance;
-
-        newInstance.on?.("call-start", () => {
+        try {
+            await vapi.start(VAPI_ASSISTANT_ID);
+        } catch (err) {
+            console.error("Failed to start Vapi call:", err);
             setCallLoading(false);
-            setCallActive(true);
-        });
-        newInstance.on?.("call-end", () => {
-            setCallActive(false);
-            setCallLoading(false);
-        });
-        // fallback timeout
-        setTimeout(() => {
-            setCallLoading(false);
-            setCallActive(true);
-        }, 4000);
+        }
     };
 
     const navLinks = [
@@ -110,14 +120,23 @@ const Navbar = () => {
                     ))}
                     <button
                         onClick={handleVapiCall}
+                        disabled={callLoading}
                         className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
-                            callActive
+                            agentSpeaking
+                                ? "bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/30"
+                                : callActive
                                 ? "bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30"
                                 : "btn-primary"
-                        } ${callLoading ? "opacity-70 cursor-wait" : ""}`}
+                        } ${callLoading ? "opacity-70 cursor-not-allowed" : ""}`}
                     >
-                        {callActive ? <PhoneOff size={16} /> : <Phone size={16} />}
-                        {callLoading ? "Connecting…" : callActive ? "End Call" : "Talk to AI"}
+                        {agentSpeaking ? (
+                            <Mic size={16} className="animate-pulse" />
+                        ) : callActive ? (
+                            <PhoneOff size={16} />
+                        ) : (
+                            <Phone size={16} />
+                        )}
+                        {callLoading ? "Connecting…" : agentSpeaking ? "AI Speaking…" : callActive ? "End Call" : "Talk to AI"}
                     </button>
                 </div>
 
@@ -152,14 +171,23 @@ const Navbar = () => {
                             ))}
                             <button
                                 onClick={() => { setIsOpen(false); handleVapiCall(); }}
+                                disabled={callLoading}
                                 className={`flex items-center justify-center gap-2 py-4 rounded-xl text-base font-bold uppercase tracking-widest transition-all duration-300 ${
-                                    callActive
+                                    agentSpeaking
+                                        ? "bg-green-500 hover:bg-green-600 text-white"
+                                        : callActive
                                         ? "bg-red-500 hover:bg-red-600 text-white"
                                         : "btn-primary"
-                                } ${callLoading ? "opacity-70 cursor-wait" : ""}`}
+                                } ${callLoading ? "opacity-70 cursor-not-allowed" : ""}`}
                             >
-                                {callActive ? <PhoneOff size={18} /> : <Phone size={18} />}
-                                {callLoading ? "Connecting…" : callActive ? "End Call" : "Talk to AI"}
+                                {agentSpeaking ? (
+                                    <Mic size={18} className="animate-pulse" />
+                                ) : callActive ? (
+                                    <PhoneOff size={18} />
+                                ) : (
+                                    <Phone size={18} />
+                                )}
+                                {callLoading ? "Connecting…" : agentSpeaking ? "AI Speaking…" : callActive ? "End Call" : "Talk to AI"}
                             </button>
                         </div>
                     </motion.div>
